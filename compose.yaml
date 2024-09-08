@@ -13,15 +13,21 @@ services:
       - mariadb-data:/var/lib/mysql
     ports:
       - 3307:3306
-
+    networks:
+      - frappe-15-net
+    
   redis-cache:
     image: docker.io/redis:alpine
     platform: linux/amd64
-
+    networks:
+      - frappe-15-net
+    
   redis-queue:
     image: docker.io/redis:alpine
     platform: linux/amd64
-
+    networks:
+      - frappe-15-net
+    
   frappe:
     image: docker.io/frappe/bench:latest
     platform: linux/amd64
@@ -39,5 +45,12 @@ services:
       - 9000-9003:9000-9003
     depends_on:
       - mariadb
+    networks:
+      - frappe-15-net
+            
 volumes:
   mariadb-data:
+
+networks:
+  frappe-15-net:
+    driver: bridge
