@@ -1,6 +1,7 @@
 services:
   mariadb:
     image: docker.io/mariadb:10.11.9
+    pull_policy: never
     platform: linux/amd64
     command:
       - --character-set-server=utf8mb4
@@ -14,22 +15,25 @@ services:
     ports:
       - 3307:3306
     networks:
-      - frappe-15-net
+      - version-15-net
     
   redis-cache:
     image: docker.io/redis:alpine
+    pull_policy: never
     platform: linux/amd64
     networks:
-      - frappe-15-net
+      - version-15-net
     
   redis-queue:
     image: docker.io/redis:alpine
+    pull_policy: never
     platform: linux/amd64
     networks:
-      - frappe-15-net
+      - version-15-net
     
   frappe:
     image: docker.io/frappe/bench:latest
+    pull_policy: never
     platform: linux/amd64
     command: bash -c "/workspace/init-bench.sh"
     # command: sleep infinity
@@ -43,14 +47,15 @@ services:
     ports:
       - 8000-8003:8000-8003
       - 9000-9003:9000-9003
+
+    networks:
+      - version-15-net
     depends_on:
       - mariadb
-    networks:
-      - frappe-15-net
-            
+
 volumes:
   mariadb-data:
 
 networks:
-  frappe-15-net:
+  version-15-net:
     driver: bridge
