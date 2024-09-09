@@ -1,6 +1,6 @@
 #!/bin/bash
 echo "init-bench.sh"
-printf '%*s' 10 | tr ' ' '\n'
+printf '%*s' 5 | tr ' ' '\n'
 
 
 export PYENV_VERSION=3.11.6
@@ -15,7 +15,7 @@ sudo wget -O jq https://github.com/stedolan/jq/releases/download/jq-1.5/jq-linux
 
 if [ ! -d "/workspace/frappe-bench" ]; then
     echo "running bench init."
-    printf '%*s' 10 | tr ' ' '\n'
+    printf '%*s' 5 | tr ' ' '\n'
 
     # permissions issues .. may be better way for frappe to have write perms
     sudo mkdir -p /workspace/frappe-bench
@@ -44,7 +44,7 @@ if [ ! -d "/workspace/frappe-bench" ]; then
     bench set-config -g mute_emails true
 else
     echo "bench exists. Skipped bench init"
-    printf '%*s' 10 | tr ' ' '\n'
+    printf '%*s' 5 | tr ' ' '\n'
 fi
 
 cd /workspace/frappe-bench && bench start && cat
