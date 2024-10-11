@@ -1,7 +1,7 @@
 services:
   mariadb:
     image: docker.io/mariadb:10.11.9
-    pull_policy: never
+    pull_policy: missing
     platform: linux/amd64
     command:
       - --character-set-server=utf8mb4
@@ -18,22 +18,22 @@ services:
       - version-15-net
     
   redis-cache:
-    image: docker.io/redis:alpine
-    pull_policy: never
+    image: redis:7.4-alpine3.20
+    pull_policy: missing
     platform: linux/amd64
     networks:
       - version-15-net
     
   redis-queue:
-    image: docker.io/redis:alpine
-    pull_policy: never
+    image: redis:7.4-alpine3.20
+    pull_policy: missing
     platform: linux/amd64
     networks:
       - version-15-net
     
   frappe:
     image: docker.io/frappe/bench:latest
-    pull_policy: never
+    pull_policy: missing
     platform: linux/amd64
     command: bash -c "/workspace/init-bench.sh"
     # command: sleep infinity
